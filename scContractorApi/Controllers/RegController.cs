@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace scContractorApi.Controllers
 {
     [Route("api1/[controller]")]
-    public class ValuesController : Controller
+    public class RegController : Controller
     {
         // GET api/values
         [HttpGet]
@@ -42,3 +42,4 @@ namespace scContractorApi.Controllers
         }
     }
 }
+
