@@ -8,18 +8,18 @@ using Newtonsoft.Json;
 
 namespace scContractorApi.Controllers
 {
-    [EnableCors("SiteCorsPolicy")]
     [Route("api/[controller]")]
     public class RegController : Controller
     {
         // GET api/reg
+        [EnableCors("MyPolicy")]
         [HttpGet]
         public string Get()
         {
             string res = BackEnd.Util.GenString(22);
             var json = new {
                 token = res
-        };
+            };
             var r = JsonConvert.SerializeObject(json);
             return r.ToString();
         }
