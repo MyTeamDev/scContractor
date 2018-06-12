@@ -5,10 +5,9 @@ function GetToken(){
             success: function( response ) {
                 token = "tkn"+response["token"]; // server response
                 localStorage.setItem("token", token);
-                //console.log(localStorage.getItem("token"));
             },
         });
     }
 
 if(!localStorage.getItem("token")){ GetToken() }
-console.log(localStorage.getItem("token"));
+
