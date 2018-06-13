@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using scContractorApi.BackEnd;
 
 namespace scContractorApi.Controllers
 {
@@ -15,13 +16,24 @@ namespace scContractorApi.Controllers
         [EnableCors("MyPolicy")]
         [HttpGet]
         public string Get()
-        {
-            string res = BackEnd.Util.GenString(22);
-            var json = new {
-                token = res
-            };
-            var r = JsonConvert.SerializeObject(json);
-            return r.ToString();
+        {     
+            do
+            {
+                string res = BackEnd.Util.GenString(22);
+                var json = new
+                {
+                    token = res
+                };
+
+                var result = JsonConvert.SerializeObject(json);
+
+                using (ListLinkContext db = new ListLinkContext())
+                {
+                    List<Link> l = db.Links.Where(x => x.Token == res).ToList<Link>();
+                    if (l.Count == 0) { return result.ToString(); }
+                }
+            }
+            while (true);            
         }
     }
 }

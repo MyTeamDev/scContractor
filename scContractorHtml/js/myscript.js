@@ -8,6 +8,18 @@ function GetToken(){
             },
         });
     }
+function GetAllLinks(token){
+    var url = "http://localhost:57231/api/values/" + token;
+    var res = $.ajax({
+        url: url,        
+        dataType: "json", 
+        success: function( response ) {
+            return response;
+        },
+    });
+    return res;
+}
 
 if(!localStorage.getItem("token")){ GetToken() }
-
+var token = localStorage.getItem("token");
+var listLinks = GetAllLinks(token);
