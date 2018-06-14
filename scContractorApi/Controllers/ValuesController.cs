@@ -31,13 +31,16 @@ namespace scContractorApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void AddLink(string token, [FromBody]object value)
+        public void AddLink([FromBody]object value)
         {
-            Link l = JsonConvert.DeserializeObject<Link>(value.ToString());
-            using (ListLinkContext db = new ListLinkContext())
-            {                
-                db.Links.Add(l);
-                db.SaveChanges();
+            if (value != null)
+            {
+                Link l = JsonConvert.DeserializeObject<Link>(value.ToString());
+                using (ListLinkContext db = new ListLinkContext())
+                {
+                    db.Links.Add(l);
+                    db.SaveChanges();
+                }
             }
         }
     }
