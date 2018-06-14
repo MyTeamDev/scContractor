@@ -10,16 +10,21 @@ function GetToken(){
     }
 function GetAllLinks(token){
     var url = "http://localhost:57231/api/values/" + token;
-    var res = $.ajax({
+    var res = [];
+    $.ajax({
         url: url,        
         dataType: "json", 
+        async:false,
         success: function( response ) {
-            return response;
+           response.forEach(element => {
+               res.push(element);
+           });;
         },
     });
     return res;
 }
-
 if(!localStorage.getItem("token")){ GetToken() }
 var token = localStorage.getItem("token");
 var listLinks = GetAllLinks(token);
+console.log(listLinks.length);
+
