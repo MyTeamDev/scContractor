@@ -21,24 +21,26 @@ function GetAllLinks(token){
            });
         },
     });
-    return res;s
+    return res;
 }
 var z = 1;
 function AddLink(link){
-    var link = document.getElementById("inputLink").value;
-    var XML = new XMLWriter();
-    console.log(data);
+    var url = document.getElementById("inputLink").value;
+    var link = {
+        link: url,
+        token: token
+    }
     ///////////////////////////   check exist if link;    
     if(true){
-        var request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:57231/api/values");
-        request.setRequestHeader('Content-Type', 'application/xml');
-        request.send(data);
+        $.post("http://localhost:57231/api/values", link, function(result){
+            //console.log(200);
+        });
     };
 }
 
 if(!localStorage.getItem("token")){ GetToken() }
 var token = localStorage.getItem("token");
 var listLinks = GetAllLinks(token);
+console.log(listLinks);
 
 

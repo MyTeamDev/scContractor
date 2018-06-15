@@ -26,7 +26,7 @@ namespace scContractorApi.BackEnd
         public string Token { get; set; }
         public string RequestLink { get; set; }
         public string TargetLink { get; set; }
-        public string CreateDate { get; set; }
-        public string RequestCount { get; set; }
+        public long CreateDate { get; set; }
+        public int RequestCount { get; set; }
     }
 }

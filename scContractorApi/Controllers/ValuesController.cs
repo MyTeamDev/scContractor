@@ -31,16 +31,19 @@ namespace scContractorApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void AddLink([FromBody]object value)
+        public void AddLink(string link, string token)
         {
-            if (value != null)
+            Link lnk = new Link();
+            lnk.Token = token;
+            lnk.TargetLink = link;
+            lnk.RequestLink = Util.GenString(6);
+            lnk.RequestCount = 0;
+            lnk.CreateDate = Util.GetCreateDate();
+
+            using (ListLinkContext db = new ListLinkContext())
             {
-                Link l = JsonConvert.DeserializeObject<Link>(value.ToString());
-                using (ListLinkContext db = new ListLinkContext())
-                {
-                    db.Links.Add(l);
-                    db.SaveChanges();
-                }
+                db.Links.Add(lnk);
+                db.SaveChanges();
             }
         }
     }
