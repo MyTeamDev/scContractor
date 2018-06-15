@@ -23,13 +23,10 @@ function GetAllLinks(token){
     });
     return res;
 }
-var z = 1;
+
 function AddLink(link){
     var url = document.getElementById("inputLink").value;
-    var link = {
-        link: url,
-        token: token
-    }
+    var link = { link: url, token: token }
     ///////////////////////////   check exist if link;    
     if(true){
         $.post("http://localhost:57231/api/values", link, function(result){
@@ -38,9 +35,21 @@ function AddLink(link){
     };
 }
 
+function FeelTableLinks(listLinks){
+    listLinks.forEach(element=>{
+        $("#TableLinks").append("<div class='divTableBody'>")
+                            .append("<div class='divTableRow'>")
+                            .append("<div class='divTableCell'>"+element.TargetLink+"</div>")
+                            .append("<div class='divTableCell'>"+element.CreateDate+"</div>")
+                            .append("<div class='divTableCell'>"+element.RequestCount+"</div>")
+                            .append("</div></div>");                  
+    });
+}
+
 if(!localStorage.getItem("token")){ GetToken() }
 var token = localStorage.getItem("token");
 var listLinks = GetAllLinks(token);
-console.log(listLinks);
+FeelTableLinks(listLinks);
+
 
 
