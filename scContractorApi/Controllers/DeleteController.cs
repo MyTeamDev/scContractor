@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using scContractorApi.BackEnd;
 
 namespace scContractorApi.Controllers
 {
@@ -22,7 +23,13 @@ namespace scContractorApi.Controllers
         [HttpGet("{requestLink}", Name = "requestLink")]
         public string Get(string requestLink)
         {
-            return "value";
+            using (ListLinkContext db = new ListLinkContext())
+            {
+                Link links = db.Links.FirstOrDefault(x => x.RequestLink == requestLink);
+                db.Links.Remove(links);
+                db.SaveChanges();
+                return "Ok";
+            }
         }
         
         // POST: api/Delete
