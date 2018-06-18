@@ -35,13 +35,30 @@ function AddLink(link){
     };
 }
 
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+  }
+  
+function myScript(){
+    console.log(34);
+}  
 function FeelTableLinks(listLinks){
     listLinks.forEach(element=>{
         $("#TableLinks").append("<div class='divTableBody'>")
                             .append("<div class='divTableRow'>")
-                            .append("<div class='divTableCell'>"+element.TargetLink+"</div>")
-                            .append("<div class='divTableCell'>"+element.CreateDate+"</div>")
+                            .append("<div class='divTableCell'><a href='http://localhost:57231/api/redirect/"+element.RequestLink+"'>"+element.TargetLink+"</div>")
+                            .append("<div class='divTableCell'>"+timeConverter(element.CreateDate)+"</div>")
                             .append("<div class='divTableCell'>"+element.RequestCount+"</div>")
+                            .append("<div class='divTableCell'><a href='http://localhost:57231/api/delete/"+element.RequestLink+"'><img src='https://www.mywed.tk/nextcloud/index.php/s/4rB3oeL4CgETsKt/preview'></a></div>")
                             .append("</div></div>");                  
     });
 }

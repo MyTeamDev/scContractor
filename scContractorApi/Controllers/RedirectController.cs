@@ -7,25 +7,18 @@ using scContractorApi.BackEnd;
 
 namespace scContractorApi.Controllers
 {
+    [Route("api/[controller]")]
     public class RedirectController : Controller
     {
-        public IActionResult Index(string link)
+        [HttpGet("{link}")]
+        public RedirectResult Index(string link)
         {
             using (ListLinkContext db = new ListLinkContext())
             {
-                List<Link> links = db.Links.Where(x => x.RequestLink == link).Select(a => new Link
-                {
-                    Id = a.Id,
-                    Token = a.Token,
-                    RequestCount = a.RequestCount,
-                    RequestLink = a.RequestLink,
-                    TargetLink = a.TargetLink,
-                    CreateDate = a.CreateDate
-                }).ToList();
-                Link l = links[0];
-                l.RequestCount = l.RequestCount + 1;
+                Link links = db.Links.FirstOrDefault(x => x.RequestLink == link);
+                links.RequestCount = links.RequestCount + 1;
                 db.SaveChanges();
-                return Content("<script>window.location = '"+l.TargetLink+"';</script>"); ;
+                return new RedirectResult(links.TargetLink);                
             }
         }
     }

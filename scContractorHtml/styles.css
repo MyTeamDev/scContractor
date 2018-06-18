@@ -3,7 +3,7 @@ div.greyGridTable {
     border: 2px solid #FFFFFF;
     background-color: #EEEEEE;
     width: 100%;
-    text-align: center;
+    text-align: left;
     border-collapse: collapse;
   }
   .divTable.greyGridTable .divTableCell, .divTable.greyGridTable .divTableHead {
