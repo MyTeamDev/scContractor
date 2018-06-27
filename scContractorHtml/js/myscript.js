@@ -106,11 +106,11 @@ function FeelTableLinks(listLinks){
         element.TargetLink = element.TargetLink+" ..."
         }
         $("#idDivTableBody").append("<div class='divTableRow'> \
-                            <div class='divTableCell'><a href='http://localhost:57231/api/redirect/"+element.RequestLink+"'>"+element.TargetLink+"</a></div> \
-                            <div class='divTableCell'><a onclick=copyToClipboard('"+element.RequestLink+"')><img src='https://www.mywed.tk/nextcloud/index.php/s/paYcSoJtCoSHy5b/preview'></a></div> \
-                            <div class='divTableCell'>"+timeConverter(element.CreateDate)+"</div> \
-                            <div class='divTableCell'>"+element.RequestCount+"</div> \
-                            <div class='divTableCell'><a onclick=RemoveLinks('"+element.RequestLink+"')><img src='https://www.mywed.tk/nextcloud/index.php/s/4rB3oeL4CgETsKt/preview'></a></div>");
+                            <div class='divTableCell divUri'><a href='http://localhost:57231/api/redirect/"+element.RequestLink+"'>"+element.TargetLink+"</a></div> \
+                            <div class='divTableCell divCopy'><a onclick=copyToClipboard('"+element.RequestLink+"')><img src='https://www.mywed.tk/nextcloud/index.php/s/paYcSoJtCoSHy5b/preview'></a></div> \
+                            <div class='divTableCell divDate'>"+timeConverter(element.CreateDate)+"</div> \
+                            <div class='divTableCell divRequest'>"+element.RequestCount+"</div> \
+                            <div class='divTableCell divRemove'><a onclick=RemoveLinks('"+element.RequestLink+"')><img src='https://www.mywed.tk/nextcloud/index.php/s/4rB3oeL4CgETsKt/preview'></a></div>");
         $("#idDivTableBody").append("</div>");                
     });
     $("#TableLinks").append("</div>")  
