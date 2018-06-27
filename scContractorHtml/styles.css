@@ -2,9 +2,10 @@ div.greyGridTable {
     font-family: Arial, Helvetica, sans-serif;
     border: 2px solid #FFFFFF;
     background-color: #EEEEEE;
-    width: 100%;
+    width: 90%;
     text-align: left;
     border-collapse: collapse;
+    overflow: hidden
   }
   .divTable.greyGridTable .divTableCell, .divTable.greyGridTable .divTableHead {
     border: 1px solid #FFFFFF;

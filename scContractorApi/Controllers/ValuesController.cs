@@ -45,6 +45,7 @@ namespace scContractorApi.Controllers
                 db.Links.Add(lnk);
                 db.SaveChanges();
             }
+            //return "Ok";
         }
     }
 }

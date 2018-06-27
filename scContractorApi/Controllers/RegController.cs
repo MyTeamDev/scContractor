@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using scContractorApi.BackEnd;
+using scContractorApi;
 
 namespace scContractorApi.Controllers
 {
@@ -13,7 +14,6 @@ namespace scContractorApi.Controllers
     public class RegController : Controller
     {
         // GET api/reg
-        [EnableCors("MyPolicy")]
         [HttpGet]
         public string Get()
         {     
@@ -30,7 +30,10 @@ namespace scContractorApi.Controllers
                 using (ListLinkContext db = new ListLinkContext())
                 {
                     List<Link> l = db.Links.Where(x => x.Token == res).ToList<Link>();
-                    if (l.Count == 0) { return result.ToString(); }
+                    if (l.Count == 0)
+                    {
+                        return result.ToString();
+                    }
                 }
             }
             while (true);            
