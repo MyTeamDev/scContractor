@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using scContractorApi.BackEnd;
+using scContractorApi;
 
 namespace scContractorApi.Controllers
 {
@@ -12,8 +16,27 @@ namespace scContractorApi.Controllers
         // GET api/reg
         [HttpGet]
         public string Get()
-        {
-            return BackEnd.Util.GenString(22);
+        {     
+            do
+            {
+                string res = BackEnd.Util.GenString(22);
+                var json = new
+                {
+                    token = res
+                };
+
+                var result = JsonConvert.SerializeObject(json);
+
+                using (ListLinkContext db = new ListLinkContext())
+                {
+                    List<Link> l = db.Links.Where(x => x.Token == res).ToList<Link>();
+                    if (l.Count == 0)
+                    {
+                        return result.ToString();
+                    }
+                }
+            }
+            while (true);            
         }
     }
 }

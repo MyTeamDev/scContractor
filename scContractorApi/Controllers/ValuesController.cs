@@ -13,31 +13,39 @@ namespace scContractorApi.Controllers
     {
         // GET api/values/5
         [HttpGet("{token}")]
-        public JsonResult GetLink(string token)
+        public string GetAllOfLink(string token)
         {
             using (ListLinkContext db = new ListLinkContext())
             {
-                var l = db.Links.Where(x => x.Token == token).Select(a=> new
+                var l = db.Links.Where(x => x.Token == token).Select(a => new
                 {
                     RequestCount = a.RequestCount,
                     RequestLink = a.RequestLink,
-                    TargetLink = a.TargetLink,  
+                    TargetLink = a.TargetLink,
                     CreateDate = a.CreateDate
-                }).ToList();
-                return Json(l);
+                });
+                var result = JsonConvert.SerializeObject(l);
+                return result;
             }
         }
 
         // POST api/values
         [HttpPost]
-        public void AddLink([FromBody]object value)
+        public void AddLink(string link, string token)
         {
-            Link l = JsonConvert.DeserializeObject<Link>(value.ToString());
+            Link lnk = new Link();
+            lnk.Token = token;
+            lnk.TargetLink = link;
+            lnk.RequestLink = Util.GenString(6);
+            lnk.RequestCount = 0;
+            lnk.CreateDate = Util.GetCreateDate();
+
             using (ListLinkContext db = new ListLinkContext())
             {
-                db.Links.Add(l);
+                db.Links.Add(lnk);
                 db.SaveChanges();
             }
+            //return "Ok";
         }
     }
 }

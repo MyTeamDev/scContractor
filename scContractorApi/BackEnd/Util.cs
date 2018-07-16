@@ -19,5 +19,10 @@ namespace scContractorApi.BackEnd
             }
             return result.ToString();
         }
+
+        internal static long GetCreateDate()
+        {
+            return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        }
     }
 }
