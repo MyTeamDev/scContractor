@@ -1,4 +1,0 @@
-curl -i -X POST -H 'Content-Type: application/json' -d '{"text": "Pull request from GitHub"}' https://mattermost.mywed.tk/hooks/989hy47dzbra5xnu3i7uiiwy1o
-cd /var/www/html/scContr/
-sudo git pull origin Production
-
